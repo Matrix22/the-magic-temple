@@ -1,0 +1,4 @@
+2
+vigenere
+ABA
+abcdefgh1234
