@@ -55,43 +55,43 @@ function check_task {
 
 	echo "...........................MAGIC CIPHER................................"
 
-    for subtask in "caesar" "vigenere" "addition"; do
-        start_test_id=0
-        end_test_id=4
-        
-        if [ $subtask == "vigenere" ]; then
-            test_score=2
-        else
-            test_score=4
-        fi
+	for subtask in "caesar" "vigenere" "addition"; do
+		start_test_id=0
+		end_test_id=4
+		
+		if [ $subtask == "vigenere" ]; then
+			test_score=2
+		else
+			test_score=4
+		fi
 
-        if [ $subtask == "caesar" ]; then
-            echo "..............................CAESAR..................................."
-        elif [ $subtask == "vigenere" ]; then
-            echo ".............................VIGENERE.................................."
-        elif [ $subtask == "addition" ]; then
-            echo ".............................ADDITION.................................."
-        fi
+		if [ $subtask == "caesar" ]; then
+			echo "..............................CAESAR..................................."
+		elif [ $subtask == "vigenere" ]; then
+			echo ".............................VIGENERE.................................."
+		elif [ $subtask == "addition" ]; then
+			echo ".............................ADDITION.................................."
+		fi
 
-        for test_id in $(seq $start_test_id $end_test_id); do
-            test_file="./input/magic_cipher/${subtask}/input${test_id}.txt"
-            ref_file="./ref/magic_cipher/${subtask}/ref${test_id}.txt"
-            output_file="./output/magic_cipher/${subtask}/output${test_id}.txt"
-        
-            ./$EXEC < "$test_file" > "$output_file"
-        
-            if [ -f "$output_file" ]; then
-                if diff -w "$output_file" "$ref_file" &> /dev/null; then
-                    let "total_score += $test_score"
-                    print_result "Test ${test_id}" "${test_score}/${test_score}p passed"
-                else 
-                    print_result "Test ${test_id}" "0/${test_score}p failed"
-                fi
-            fi
-        done
-    done
+		for test_id in $(seq $start_test_id $end_test_id); do
+			test_file="./input/magic_cipher/${subtask}/input${test_id}.txt"
+			ref_file="./ref/magic_cipher/${subtask}/ref${test_id}.txt"
+			output_file="./output/magic_cipher/${subtask}/output${test_id}.txt"
+		
+			./$EXEC < "$test_file" > "$output_file"
+		
+			if [ -f "$output_file" ]; then
+				if diff -w "$output_file" "$ref_file" &> /dev/null; then
+					let "total_score += $test_score"
+					print_result "Test ${test_id}" "${test_score}/${test_score}p passed"
+				else 
+					print_result "Test ${test_id}" "0/${test_score}p failed"
+				fi
+			fi
+		done
+	done
 
-    echo " "
+	echo " "
 
 	start_test_id=0
 	end_test_id=4
@@ -101,11 +101,11 @@ function check_task {
 
 	for test_id in $(seq $start_test_id $end_test_id); do
 		test_file="./input/two_grams/input${test_id}.txt"
-            ref_file="./ref/two_grams/ref${test_id}.txt"
-            output_file="./output/two_grams/output${test_id}.txt"
-	
+			ref_file="./ref/two_grams/ref${test_id}.txt"
+			output_file="./output/two_grams/output${test_id}.txt"
+
 		./$EXEC < "$test_file" > "$output_file"
-	
+
 		if [ -f "$output_file" ]; then
 			if diff -w "$output_file" "$ref_file" &> /dev/null; then
 				let "total_score += $test_score"
@@ -117,7 +117,7 @@ function check_task {
 		rm -f "$output_file"
 	done
 
-    echo " "
+	echo " "
 }
 
 init
