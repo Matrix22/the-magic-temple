@@ -58,7 +58,7 @@ function check_task {
 	for subtask in "caesar" "vigenere" "addition"; do
 		start_test_id=0
 		end_test_id=4
-		
+
 		if [ $subtask == "vigenere" ]; then
 			test_score=2
 		else
@@ -77,9 +77,9 @@ function check_task {
 			test_file="./input/magic_cipher/${subtask}/input${test_id}.txt"
 			ref_file="./ref/magic_cipher/${subtask}/ref${test_id}.txt"
 			output_file="./output/magic_cipher/${subtask}/output${test_id}.txt"
-		
+
 			./$EXEC < "$test_file" > "$output_file"
-		
+
 			if [ -f "$output_file" ]; then
 				if diff -w "$output_file" "$ref_file" &> /dev/null; then
 					let "total_score += $test_score"
