@@ -13,9 +13,9 @@ function init {
 	fi
 
 	mkdir -p output/magic_words
-	mkdir -p output/magic_cipher/caesar
-	mkdir -p output/magic_cipher/vigenere
-	mkdir -p output/magic_cipher/addition
+	mkdir -p output/magic_ciphers/caesar
+	mkdir -p output/magic_ciphers/vigenere
+	mkdir -p output/magic_ciphers/addition
 	mkdir -p output/two_grams/
 }
 
@@ -65,9 +65,9 @@ function check_task {
 		fi
 
 		for test_id in $(seq $start_test_id $end_test_id); do
-			test_file="./input/magic_cipher/${subtask}/input${test_id}.txt"
-			ref_file="./ref/magic_cipher/${subtask}/ref${test_id}.txt"
-			output_file="./output/magic_cipher/${subtask}/output${test_id}.txt"
+			test_file="./input/magic_ciphers/${subtask}/input${test_id}.txt"
+			ref_file="./ref/magic_ciphers/${subtask}/ref${test_id}.txt"
+			output_file="./output/magic_ciphers/${subtask}/output${test_id}.txt"
 
 			./$EXEC < "$test_file" > "$output_file"
 
