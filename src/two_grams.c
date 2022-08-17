@@ -2,13 +2,21 @@
 
 #define WORD_SEPARATOR " \n,.!;"
 
+/**
+ * @brief Function to solve "two grams" task explained
+ * in the readme file
+ * 
+ */
 void two_grams(void) {
+
+    /* Allocate a string buffer */
     char *line = malloc(BUFFER_LEN);
 
     if (line == NULL) {
         return;
     }
 
+    /* Allocate an array of strings literals */
     char **words = malloc(sizeof(*words) * BUFFER_LEN);
 
     if (words == NULL) {
@@ -24,6 +32,7 @@ void two_grams(void) {
         words[iter] = malloc(MAX_WORD_LEN);
     }
 
+    /* Extract all the words from the text */
     while (fgets(line, BUFFER_LEN, stdin) != NULL) {
         char *word = NULL, *rest = NULL;
 
@@ -41,6 +50,7 @@ void two_grams(void) {
 
     --num_of_words;
 
+    /* Allocate the two grams array */
     char **n2_grams = malloc(sizeof(char *) * num_of_words);
 
     if (n2_grams == NULL) {
@@ -55,12 +65,14 @@ void two_grams(void) {
         return;
     }
 
+    /* Calculate all the two grams from the given words */
     for (int32_t iter = 0; iter < num_of_words; ++iter) {
         n2_grams[iter] = malloc(MAX_WORD_LEN);
         
         snprintf(n2_grams[iter], MAX_WORD_LEN, "%s %s", words[iter], words[iter + 1]);
     }
 
+    /* Free memory for words array */
     for (int32_t iter = 0; iter < BUFFER_LEN; ++iter) {
         free(words[iter]);
         words[iter] = NULL;
@@ -69,6 +81,7 @@ void two_grams(void) {
     free(words);
     words = NULL;
 
+    /* Array for the frequency of the two grams */
     int *freq_2grams = malloc(sizeof(int) * num_of_words);
 
     if (freq_2grams == NULL) {
@@ -81,6 +94,7 @@ void two_grams(void) {
         n2_grams = NULL;        
     }
 
+    /* Array for unique two grams */
     char **unique_2grams = malloc(sizeof(char *) * num_of_words);
 
     if (unique_2grams == NULL) {
@@ -103,6 +117,7 @@ void two_grams(void) {
         unique_2grams[iter] = malloc(MAX_WORD_LEN);
     }
 
+    /* Compute the unique two grams */
     snprintf(unique_2grams[0], MAX_WORD_LEN, "%s", n2_grams[0]);
     freq_2grams[0] = 1;
 
@@ -123,11 +138,13 @@ void two_grams(void) {
         }
     }
 
+    /* Print the unique two grams and their frequency */
     printf("%d\n", uniq_2grams_num);
     for (int32_t iter = 0; iter < uniq_2grams_num; ++iter) {
         printf("%s %d\n", unique_2grams[iter], freq_2grams[iter]);
     }
 
+    /* Free memory */
     for (int32_t iter = 0; iter < num_of_words; ++iter) {
         free(unique_2grams[iter]);
         unique_2grams[iter] = NULL;
